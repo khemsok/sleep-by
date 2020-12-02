@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 
 // MUI
 import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { makeStyles } from "@material-ui/core/styles";
 
 // util
 import moment from "moment";
 
 const COLORS = ["#e61a19", "#e96416", "#eb9314", "#e6da19", "#a6ea15", "#44d12e"];
+
+const useStyles = makeStyles((theme) => ({
+  description: {
+    marginBottom: "20px",
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+    },
+  },
+}));
 
 function calculateRemCycles(time, fallAsleepBy = 0) {
   const remCycles = [1, 2, 3, 4, 5, 6];
@@ -21,6 +30,8 @@ function calculateRemCycles(time, fallAsleepBy = 0) {
 }
 
 export default function SleepNow() {
+  const classes = useStyles();
+
   const [timesToWakeUp, setTimesToWakeUp] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +52,7 @@ export default function SleepNow() {
 
   return (
     <div>
-      <Typography variant="h5" style={{ marginBottom: "20px" }}>
+      <Typography variant="h5" className={classes.description}>
         If you <b>head to bed now</b>, you should <b>wake up</b> at...
       </Typography>
       {isLoading ? (
