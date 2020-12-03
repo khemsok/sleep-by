@@ -4,3 +4,13 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+@keyframes blink {
+  50% {
+    color: transparent;
+  }
+}
+
+.blinking {
+  animation: 1s blink infinite;
+}

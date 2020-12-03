@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
+
+// MUI Icons
+import InfoIcon from "@material-ui/icons/Info";
 
 // util
 import moment from "moment";
@@ -14,6 +18,7 @@ const COLORS = ["#e61a19", "#e96416", "#eb9314", "#e6da19", "#a6ea15", "#44d12e"
 const useStyles = makeStyles((theme) => ({
   description: {
     marginBottom: "20px",
+
     [theme.breakpoints.down("md")]: {
       textAlign: "center",
     },
@@ -42,7 +47,7 @@ export default function SleepNow() {
       setTimeout(() => {
         setIsLoading(false);
       }, 500);
-    }, 300000); // 5 minutes
+    }, 60000); // 1 minutes
     return () => clearInterval(interval);
   }, []);
 
@@ -51,10 +56,18 @@ export default function SleepNow() {
   }, []);
 
   return (
-    <div>
-      <Typography variant="h5" className={classes.description}>
-        If you <b>head to bed now</b>, you should <b>wake up</b> at...
-      </Typography>
+    <div style={{ marginBottom: "100px" }}>
+      <div style={{}} className={classes.description}>
+        <Typography variant="h5">
+          If you <b>head to bed now</b>, you should <b>wake up</b> at...{" "}
+          <Tooltip title="Assumed that you fall asleep within 20 minutes" placement="top">
+            <span>
+              <InfoIcon style={{ verticalAlign: "center", fontSize: ".7em", cursor: "pointer" }} />
+            </span>
+          </Tooltip>
+        </Typography>
+      </div>
+
       {isLoading ? (
         <div style={{ height: "110px" }}>
           <LinearProgress />
@@ -71,10 +84,16 @@ export default function SleepNow() {
           ))}
         </div>
       )}
-
-      <Typography variant="h6" align="center">
-        A good night sleep consists of 5-6 rem cycles.
-      </Typography>
+      <div>
+        <Typography variant="body1" align="center" style={{ fontSize: "1.2em" }}>
+          A good night sleep consists of <b>5-6</b> rem cycles{" "}
+          <Tooltip title="A rem cycle is roughly 1.5 hours" placement="top">
+            <span>
+              <InfoIcon style={{ verticalAlign: "center", fontSize: ".8em", cursor: "pointer" }} />
+            </span>
+          </Tooltip>
+        </Typography>
+      </div>
     </div>
   );
 }

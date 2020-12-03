@@ -1,6 +1,7 @@
 // Components
 import Header from "../components/Header";
 import SleepNow from "../components/SleepNow";
+import WhenToSleep from "../components/WhenToSleep";
 import Footer from "../components/Footer";
 
 // MUI
@@ -19,6 +20,7 @@ export default function Home() {
         >
           <Header />
           <SleepNow />
+          <WhenToSleep />
           <Footer />
         </div>
       </Container>

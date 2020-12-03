@@ -6,6 +6,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { light, dark } from "../src/theme";
 
+import "../styles/global.css";
+
 const lightTheme = createMuiTheme(light);
 const darkTheme = createMuiTheme(dark);
 
