@@ -55,12 +55,12 @@ export default function Header() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <Typography variant="h4">Sleep By 💤</Typography>
+          <Typography variant="body2" style={{ marginBottom: "10px" }}>
+            Get deeper sleep tonight...
+          </Typography>
         </div>
         <DarkModeToggle onChange={handleThemeChange} checked={theme === "dark" ? true : false} size={60} speed={1.8} />
       </div>
-      <Typography variant="body2" style={{ marginBottom: "10px" }}>
-        Get deeper sleep tonight...
-      </Typography>
 
       {/* <Typography variant="body1" style={{ marginRight: "5px" }}>
         <Tooltip title="Current Time" placement="top">
