@@ -45,13 +45,11 @@ export default function WhenToSleep() {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    if (date != "Invalid Date") {
+    if (date != "Invalid Date" && date != null) {
       setTimesToSleep(calculateRemCycles(date, 20));
       setDisplayTip(true);
     }
   };
-
-  console.log(timesToSleep);
 
   return (
     <Container maxWidth="md">

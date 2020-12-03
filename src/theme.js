@@ -39,7 +39,7 @@ const typographyObj = {
 };
 
 // Create a theme instance.
-export const light = createMuiTheme({
+export const dark = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
@@ -58,11 +58,11 @@ export const light = createMuiTheme({
   typography: typographyObj,
 });
 
-export const dark = createMuiTheme({
+export const light = createMuiTheme({
   palette: {
-    type: "dark",
+    type: "light",
     primary: {
-      main: "#2DC2BB",
+      main: "#7CB7C0",
     },
     secondary: {
       main: "#19857b",
@@ -71,7 +71,7 @@ export const dark = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: "#000",
+      default: "#fffef2",
     },
   },
   typography: typographyObj,
