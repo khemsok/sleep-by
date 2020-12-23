@@ -83,7 +83,7 @@ export default function Alert() {
             }}
             error={snackbarOpen}
             autoFocus
-            label="Enter your sleep timer..."
+            label="Enter your sleep timer in minutes..."
             fullWidth
           />
         </DialogContent>
