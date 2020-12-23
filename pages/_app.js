@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -7,6 +7,10 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { light, dark } from "../src/theme";
 
 import { ThemeContext } from "../context/ThemeContext";
+import { SleepTimeProvider } from "../context/SleepTimeContext";
+
+// Components
+import Alert from "../components/Alert";
 
 import "../styles/global.css";
 
@@ -43,9 +47,10 @@ export default function MyApp(props) {
       </Head>
       <ThemeContext.Provider value={{ handleThemeChange, theme, setTheme }}>
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
+          <SleepTimeProvider>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </SleepTimeProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
     </React.Fragment>

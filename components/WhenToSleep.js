@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// Context
+import { useSleepTime } from "../context/SleepTimeContext";
 
 // MUI
 import Grid from "@material-ui/core/Grid";
@@ -39,6 +42,8 @@ function calculateRemCycles(time, fallAsleepBy = 0) {
 export default function WhenToSleep() {
   const classes = useStyles();
 
+  const { sleepTime } = useSleepTime();
+
   const [selectedDate, setSelectedDate] = useState(new Date("1997-02-07T00:00:00"));
   const [timesToSleep, setTimesToSleep] = useState([]);
   const [displayTip, setDisplayTip] = useState(false);
@@ -46,17 +51,23 @@ export default function WhenToSleep() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     if (date != "Invalid Date" && date != null) {
-      setTimesToSleep(calculateRemCycles(date, 20));
+      setTimesToSleep(calculateRemCycles(date, sleepTime));
       setDisplayTip(true);
     }
   };
+
+  useEffect(() => {
+    if (selectedDate && displayTip) {
+      handleDateChange(selectedDate);
+    }
+  }, [sleepTime]);
 
   return (
     <Container maxWidth="md">
       <div style={{ marginBottom: "20px", display: "flex", flexDirection: "column", flexWrap: "wrap" }}>
         <Typography variant="h5" className={classes.description}>
           I need to <b>wake up</b> at...{" "}
-          <Tooltip title="Assumed that you fall asleep within 20 minutes" placement="top">
+          <Tooltip title={`Assumed that you fall asleep within ${sleepTime} minutes`} placement="top">
             <span>
               <InfoIcon style={{ verticalAlign: "center", fontSize: ".7em", cursor: "pointer" }} />
             </span>

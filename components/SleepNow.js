@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+// Context
+import { useSleepTime } from "../context/SleepTimeContext";
+
 // MUI
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -37,12 +40,14 @@ function calculateRemCycles(time, fallAsleepBy = 0) {
 export default function SleepNow() {
   const classes = useStyles();
 
+  const { sleepTime } = useSleepTime();
+
   const [timesToWakeUp, setTimesToWakeUp] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimesToWakeUp(calculateRemCycles(new Date(), 20));
+      setTimesToWakeUp(calculateRemCycles(new Date(), sleepTime));
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
@@ -52,15 +57,15 @@ export default function SleepNow() {
   }, []);
 
   useEffect(() => {
-    setTimesToWakeUp(calculateRemCycles(new Date(), 20));
-  }, []);
+    setTimesToWakeUp(calculateRemCycles(new Date(), sleepTime));
+  }, [sleepTime]);
 
   return (
     <div style={{ marginBottom: "100px" }}>
       <div style={{}} className={classes.description}>
         <Typography variant="h5">
           If you <b>head to bed now</b>, you should <b>wake up</b> at...{" "}
-          <Tooltip title="Assumed that you fall asleep within 20 minutes" placement="top">
+          <Tooltip title={`Assumed that you fall asleep within ${sleepTime} minutes`} placement="top">
             <span>
               <InfoIcon style={{ verticalAlign: "center", fontSize: ".7em", cursor: "pointer" }} />
             </span>
